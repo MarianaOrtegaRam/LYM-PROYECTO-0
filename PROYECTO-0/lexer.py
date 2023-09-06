@@ -141,13 +141,9 @@ def leer_archivo(ruta)->None:
             else:
             
                 palabracreada = palabracreada + letra
-           
-               
-    print(lexer)
-    print(diccionario)
-    print(diccionario2)
-    pass
 
+    return lexer, diccionario
+               
 
 #prueba de lexer
-"""print(leer_archivo("programa.txt"))"""
+#print(leer_archivo("programa.txt"))

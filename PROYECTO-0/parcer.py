@@ -54,6 +54,7 @@ simple command can be executed without error.
 """
 import lexer
 
+cadena_lexer, diccionario_completo = lexer.leer_archivo()
 
 def comandos():
     dicc = {
