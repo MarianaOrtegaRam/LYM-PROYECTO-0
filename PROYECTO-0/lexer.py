@@ -149,5 +149,5 @@ def leer_archivo(ruta)->None:
     pass
 
 
-
-print(leer_archivo("programa.txt"))
+#prueba de lexer
+"""print(leer_archivo("programa.txt"))"""
