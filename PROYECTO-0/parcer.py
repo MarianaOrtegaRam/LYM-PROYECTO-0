@@ -52,10 +52,22 @@ simple command can be executed without error.
 27)not: cond – where cond is a condition
 
 """
+import lexer
+
 
 def comandos():
-    lista = ["jump","walk","leap","turn","turnto","drop","get","grab","letgo","nop"]
-    return lista
+    dicc = {
+    "JUMP":"JUMP",
+       "WALK": "WALK",
+       "LEAP": "LEAP",
+       "TURN": "TURN",
+       "TURNTO": "TURNTO",
+       "DROP": "DROP",
+       "GET": "GET",
+       "GRAB" : "GRAB",
+       "LETGO":"LETGO",
+       "NOP": "NOP"}
+    return dicc
 
 valores_iniciales = ["0","1","2","3","4","5","6","7","8"]
 def recorrerArchivo(archivo):
@@ -116,3 +128,4 @@ def isValue(caracter:str, variables_def):
     return centinela
 
 print(isValue("a", ["b","si","a"]))
+

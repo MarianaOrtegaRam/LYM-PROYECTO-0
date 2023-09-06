@@ -9,7 +9,6 @@ def crear_diccionario()-> dict:
        ":":"dospuntos",
        "{": "LLAVECURVAABIERTA",
        "}": "LLAVECURVACERRADA",
-       "|": "OR",
        #PALABRAS RESERVADAS
        "defvar" : "DECLVAR",
        "defproc": "PROCEDIMIENTOS",
@@ -71,7 +70,6 @@ def leer_archivo(ruta)->None:
     diccionario2 = otroDic()
     lastword =""
     diccionariofunciones = {}
-    contador_or = 0
     temporal = "."
     for linea in archivo :
         linea = " " + linea + " " 
@@ -97,8 +95,9 @@ def leer_archivo(ruta)->None:
                 elif (palabracreada in diccionario) or (letra in diccionario) or (letra in listanum):
                     
                     if(palabracreada in diccionario):   
-                        if (palabracreada == "defvar") :
+                        if (palabracreada == "defvar") or (palabracreada == "defproc"):
                             temporal = "variable"
+                        
 
 
                         
@@ -112,9 +111,13 @@ def leer_archivo(ruta)->None:
                                 lastword = "INT"
                             else:   
                                 if(temporal == "variable"):
-                                    diccionario["var-" + palabracreada] = "var-" + palabracreada
-                                    lexer = lexer + " " + "var"
-                                    lastword = "var"
+                                    if letra == "(" and palabracreada not in diccionario and lastword == "PROCEDIMIENTOS":
+                                        diccionario[palabracreada] = palabracreada 
+                                        lexer = lexer + " " + palabracreada
+                                    else:
+                                        diccionario["var-" + palabracreada] = "var-" + palabracreada
+                                        lexer = lexer + " " + "var"
+                                        lastword = "var"
                                 elif("var-"+palabracreada) in diccionario :
                                     lexer = lexer + " " + "var"
                                     lastword = "var"
@@ -130,15 +133,6 @@ def leer_archivo(ruta)->None:
                     if letra in diccionario:
                         if letra == ";":
                             temporal =""
-                        if(letra == "|"):
-                            contador_or +=1
-                            if(contador_or != 2):
-                                temporal = "variable"
-                            elif(contador_or == 2):
-                                temporal =""
-                                contador_or = 0
-
-                        
                         lexer = lexer + " " + diccionario[letra] 
                         lastword = diccionario[letra]
                         # hacer que escriba en un archivo lo que dice el lexer
